@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Flashcards - Verbul LASSEN | Claudia Toth</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .back-link {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-link:hover {
+            background: #f0fdf4;
+            transform: translateY(-50%) translateX(-3px);
+        }
+        
+        .header h1 {
+            color: #10b981;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        /* CONTAINER */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* PROGRESS BAR */
+        .progress-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* FLASHCARD */
+        .flashcard-wrapper {
+            perspective: 1000px;
+            margin-bottom: 30px;
+        }
+        
+        .flashcard {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-front {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+        
+        .card-back {
+            background: white;
+            color: #1f2937;
+            transform: rotateY(180deg);
+        }
+        
+        .card-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .card-front .card-label {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .card-back .card-label {
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .card-content {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .card-extra {
+            font-size: 18px;
+            text-align: center;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+        
+        .card-front .card-extra {
+            color: rgba(255, 255, 255, 0.95);
+        }
+        
+        .card-back .card-extra {
+            color: #6b7280;
+        }
+        
+        /* AUDIO BUTTON ON CARD */
+        .audio-btn-card {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .audio-btn-card:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        
+        .card-back .audio-btn-card {
+            background: #10b981;
+            border: 2px solid #10b981;
+            color: white;
+        }
+        
+        .card-back .audio-btn-card:hover {
+            background: #059669;
+            border-color: #059669;
+        }
+        
+        .flip-hint {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .card-back .flip-hint {
+            color: #6b7280;
+        }
+        
+        /* CONTROLS */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #10b981;
+            border: 2px solid #10b981;
+        }
+        
+        .btn-secondary:hover {
+            background: #f0fdf4;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* NAVIGATION */
+        .navigation {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-links a:hover {
+            background: #f0fdf4;
+            transform: translateY(-2px);
+        }
+        
+        /* COMPLETION */
+        .completion {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: none;
+        }
+        
+        .completion.show {
+            display: block;
+        }
+        
+        .completion h2 {
+            color: #10b981;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .completion p {
+            color: #6b7280;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: auto;
+            padding-top: 30px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header {
+                padding-top: 60px;
+            }
+            
+            .back-link {
+                position: static;
+                transform: none;
+                display: block;
+                margin: 0 auto 20px auto;
+                width: fit-content;
+            }
+            
+            .back-link:hover {
+                transform: translateX(-3px);
+            }
+            
+            .header h1 { font-size: 24px; }
+            .card-content { font-size: 32px; }
+            .card-extra { font-size: 16px; }
+            .flashcard { height: 350px; }
+            .card-face { padding: 30px; }
+            .btn { padding: 12px 20px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <a href="index.html" class="back-link">← Înapoi la lecție</a>
+            <div class="logo">ʚଓ</div>
+            <h1>Flashcards - Verbul LASSEN</h1>
+            <p>Învață conjugarea și expresiile în mod interactiv</p>
+        </div>
+        
+        <!-- PROGRESS -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Card 1 din 20</div>
+        </div>
+        
+        <!-- FLASHCARD -->
+        <div class="flashcard-wrapper">
+            <div class="flashcard" id="flashcard" onclick="flipCard()">
+                <div class="card-face card-front">
+                    <div class="card-label">GERMANĂ</div>
+                    <div class="card-content" id="frontContent">ich lasse</div>
+                    <div class="card-extra" id="frontExtra">Prezent - persoana I</div>
+                    <button class="audio-btn-card" onclick="speakGerman(event)">🔊 Ascultă</button>
+                    <div class="flip-hint">👆 Click pentru traducere</div>
+                </div>
+                
+                <div class="card-face card-back">
+                    <div class="card-label">ROMÂNĂ</div>
+                    <div class="card-content" id="backContent">eu las</div>
+                    <div class="card-extra" id="backExtra">Ich lasse dich gehen. = Te las să pleci.</div>
+                    <button class="audio-btn-card" onclick="speakGerman(event)">🔊 Repetă</button>
+                    <div class="flip-hint">👆 Click pentru germană</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CONTROLS -->
+        <div class="controls">
+            <button class="btn btn-secondary" id="prevBtn" onclick="previousCard()" disabled>
+                ◀ Anterior
+            </button>
+            <button class="btn btn-primary" id="shuffleBtn" onclick="shuffleCards()">
+                🔀 Amestecă
+            </button>
+            <button class="btn btn-secondary" id="nextBtn" onclick="nextCard()">
+                Următor ▶
+            </button>
+        </div>
+        
+        <!-- COMPLETION MESSAGE (hidden initially) -->
+        <div class="completion" id="completion">
+            <h2>🎉 Felicitări!</h2>
+            <p>Ai parcurs toate cele 20 de flashcards!</p>
+            <button class="btn btn-primary" onclick="restartCards()">↻ Restart</button>
+        </div>
+        
+        <!-- NAVIGATION -->
+        <div class="navigation">
+            <div class="nav-links">
+                <a href="index.html">📚 Înapoi la lecție</a>
+                <a href="test-final.html">🏆 Test Final</a>
+                <a href="https://yaz5dfqyx89.typeform.com/to/Gjbfu2WK" target="_blank">📊 Feedback</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>ʚଓ Claudia Toth</strong> - Curs autorizat de limba germană</p>
+        <p>© 2026</p>
+    </div>
+    
+    <script>
+        // FLASHCARDS DATA
+        const flashcards = [
+            // PRÄSENS
+            { front: "ich lasse", back: "eu las", category: "Prezent - persoana I", example: "Ich lasse dich gehen. = Te las să pleci." },
+            { front: "du lässt", back: "tu lași", category: "Prezent - persoana II", example: "Du lässt mich warten. = Mă lași să aștept." },
+            { front: "er/sie/es lässt", back: "el/ea lasă", category: "Prezent - persoana III", example: "Er lässt das Auto reparieren. = El lasă mașina la reparat." },
+            { front: "wir lassen", back: "noi lăsăm", category: "Prezent - persoana I plural", example: "Wir lassen die Kinder spielen. = Lăsăm copiii să se joace." },
+            { front: "ihr lasst", back: "voi lăsați", category: "Prezent - persoana II plural", example: "Ihr lasst uns nicht helfen. = Nu ne lăsați să ajutăm." },
+            { front: "sie/Sie lassen", back: "ei/dv. lăsați", category: "Prezent - persoana III plural", example: "Sie lassen ihn schlafen. = Îl lasă să doarmă." },
+            
+            // PRÄTERITUM
+            { front: "ich ließ", back: "eu lăsam", category: "Imperfect - persoana I", example: "Ich ließ ihn gehen. = L-am lăsat să plece." },
+            { front: "du ließest", back: "tu lăsai", category: "Imperfect - persoana II", example: "Du ließest das Fenster offen. = Ai lăsat fereastra deschisă." },
+            { front: "er/sie/es ließ", back: "el/ea lăsa", category: "Imperfect - persoana III", example: "Sie ließ das Auto reparieren. = A dat mașina la reparat." },
+            { front: "wir ließen", back: "noi lăsam", category: "Imperfect - persoana I plural", example: "Wir ließen das Haus bauen. = Am construit casa." },
+            
+            // PERFEKT
+            { front: "habe gelassen", back: "am lăsat", category: "Perfect - singur", example: "Ich habe es gelassen. = Am lăsat-o baltă." },
+            { front: "habe... lassen", back: "am lăsat (cu infinitiv)", category: "Perfect - infinitiv dublu", example: "Ich habe das Auto reparieren lassen. = Am dat mașina la reparat." },
+            { front: "hat... lassen", back: "a lăsat", category: "Perfect - persoana III", example: "Er hat ihn gehen lassen. = L-a lăsat să plece." },
+            
+            // EXPRESII
+            { front: "Lass das!", back: "Las-o baltă!", category: "Expresie uzuală", example: "Lass das! Das ist gefährlich! = Las-o baltă! E periculos!" },
+            { front: "Lass mich in Ruhe!", back: "Lasă-mă în pace!", category: "Expresie uzuală", example: "Lass mich in Ruhe! Ich bin beschäftigt. = Lasă-mă în pace! Sunt ocupat." },
+            { front: "Lass uns gehen!", back: "Hai să mergem!", category: "Expresie uzuală", example: "Lass uns gehen! Es ist spät. = Hai să mergem! E târziu." },
+            { front: "Das lässt sich machen.", back: "Asta se poate face.", category: "Expresie uzuală", example: "Kein Problem, das lässt sich machen. = Nicio problemă, asta se poate face." },
+            { front: "Das lässt sich nicht sagen.", back: "Asta nu se poate spune.", category: "Expresie uzuală", example: "Das lässt sich nicht sagen. = Nu se poate spune." },
+            
+            // STRUCTURI
+            { front: "lassen + Akkusativ + Infinitiv", back: "structură: a lăsa pe cineva să facă ceva", category: "Structură gramaticală", example: "Ich lasse dich schlafen. = Te las să dormi." },
+            { front: "lassen + Objekt + Infinitiv", back: "structură: a da ceva la făcut", category: "Structură gramaticală", example: "Ich lasse die Haare schneiden. = Mă tund." }
+        ];
+        
+        let currentIndex = 0;
+        let isFlipped = false;
+        
+        // TEXT-TO-SPEECH FUNCTION (IMPROVED!)
+        function speakGerman(event) {
+            event.stopPropagation(); // Prevent card flip
+            
+            const germanText = document.getElementById('frontContent').textContent;
+            
+            if ('speechSynthesis' in window) {
+                // Cancel any ongoing speech
+                window.speechSynthesis.cancel();
+                
+                // Wait for voices to load
+                let voices = window.speechSynthesis.getVoices();
+                
+                // If voices not loaded, wait for them
+                if (voices.length === 0) {
+                    window.speechSynthesis.addEventListener('voiceschanged', function() {
+                        speakWithVoice(germanText);
+                    });
+                } else {
+                    speakWithVoice(germanText);
+                }
+            } else {
+                alert('Browser-ul tău nu suportă text-to-speech. Încearcă Chrome sau Edge.');
+            }
+        }
+        
+        function speakWithVoice(text) {
+            const voices = window.speechSynthesis.getVoices();
+            
+            // Try to find German voice
+            let germanVoice = voices.find(voice => voice.lang.startsWith('de'));
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            
+            if (germanVoice) {
+                utterance.voice = germanVoice;
+                utterance.lang = 'de-DE';
+            } else {
+                // Fallback: use default voice but still set German language
+                utterance.lang = 'de-DE';
+                console.log('⚠️ No German voice found, using default voice');
+            }
+            
+            utterance.rate = 0.8;
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+            // Debug
+            utterance.onstart = function() {
+                console.log('🔊 Speaking:', text);
+            };
+            
+            utterance.onerror = function(event) {
+                console.error('❌ Speech error:', event);
+                alert('Nu pot reda audio. Verifică dacă ai vocea germană instalată în sistem.');
+            };
+            
+            window.speechSynthesis.speak(utterance);
+        }
+        
+        // FLIP CARD
+        function flipCard() {
+            const card = document.getElementById('flashcard');
+            card.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+        
+        // UPDATE CARD
+        function updateCard() {
+            const card = flashcards[currentIndex];
+            
+            // Reset flip
+            const cardElement = document.getElementById('flashcard');
+            cardElement.classList.remove('flipped');
+            isFlipped = false;
+            
+            // Update content
+            document.getElementById('frontContent').textContent = card.front;
+            document.getElementById('frontExtra').textContent = card.category;
+            document.getElementById('backContent').textContent = card.back;
+            document.getElementById('backExtra').textContent = card.example;
+            
+            // Update progress
+            const progress = ((currentIndex + 1) / flashcards.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Card ${currentIndex + 1} din ${flashcards.length}`;
+            
+            // Update buttons
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').disabled = currentIndex === flashcards.length - 1;
+            
+            // Check if completed
+            if (currentIndex === flashcards.length - 1) {
+                // Don't show completion yet, only after clicking next on last card
+            }
+        }
+        
+        // NEXT CARD
+        function nextCard() {
+            if (currentIndex < flashcards.length - 1) {
+                currentIndex++;
+                updateCard();
+            } else {
+                // Show completion
+                document.querySelector('.flashcard-wrapper').style.display = 'none';
+                document.querySelector('.controls').style.display = 'none';
+                document.querySelector('.progress-container').style.display = 'none';
+                document.getElementById('completion').classList.add('show');
+            }
+        }
+        
+        // PREVIOUS CARD
+        function previousCard() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        }
+        
+        // SHUFFLE CARDS
+        function shuffleCards() {
+            for (let i = flashcards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [flashcards[i], flashcards[j]] = [flashcards[j], flashcards[i]];
+            }
+            currentIndex = 0;
+            updateCard();
+        }
+        
+        // RESTART
+        function restartCards() {
+            currentIndex = 0;
+            document.querySelector('.flashcard-wrapper').style.display = 'block';
+            document.querySelector('.controls').style.display = 'flex';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.getElementById('completion').classList.remove('show');
+            updateCard();
+        }
+        
+        // KEYBOARD NAVIGATION
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowLeft') {
+                previousCard();
+            } else if (event.key === 'ArrowRight') {
+                nextCard();
+            } else if (event.key === ' ') {
+                event.preventDefault();
+                flipCard();
+            }
+        });
+        
+        // INITIALIZE VOICES (important for some browsers!)
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.addEventListener('voiceschanged', function() {
+            console.log('✅ Voices loaded:', window.speechSynthesis.getVoices().length);
+        });
+        
+        // INITIALIZE
+        updateCard();
+    </script>
+</body>
+</html>
