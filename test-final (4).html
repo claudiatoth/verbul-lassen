@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Test Final - Verbul LASSEN | Claudia Toth</title>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+        }
+        
+        .back-link {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-link:hover {
+            background: #f0fdf4;
+            transform: translateY(-50%) translateX(-3px);
+        }
+        
+        .header h1 {
+            color: #10b981;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+        
+        .logo {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        /* CONTAINER */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* PROGRESS BAR */
+        .progress-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* TEST INFO */
+        .test-info {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .test-info h2 {
+            color: #10b981;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .test-info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .test-info li {
+            padding: 8px 0;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* QUESTION CARD */
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            min-height: 400px;
+            display: none;
+        }
+        
+        .question-card.active {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .question-number {
+            color: #10b981;
+            font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+        
+        .question-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        /* INPUT STYLES */
+        .input-text {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 18px;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-text:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+        
+        /* RADIO BUTTONS */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .radio-label {
+            cursor: pointer;
+            padding: 18px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+        }
+        
+        .radio-label:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .radio-label input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        /* NAVIGATION BUTTONS */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #10b981;
+            border: 2px solid #10b981;
+        }
+        
+        .btn-secondary:hover:not(:disabled) {
+            background: #f0fdf4;
+        }
+        
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        /* RESULTS */
+        .results {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: none;
+        }
+        
+        .results.show { display: block; }
+        
+        .results h2 {
+            color: #10b981;
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 8px solid #10b981;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            font-size: 48px;
+            font-weight: bold;
+            color: #10b981;
+        }
+        
+        .results p {
+            color: #6b7280;
+            font-size: 18px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .grade {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .grade.excellent { color: #10b981; }
+        .grade.good { color: #f59e0b; }
+        .grade.needs-improvement { color: #ef4444; }
+        
+        /* REVIEW SECTION */
+        .review-section {
+            margin-top: 40px;
+        }
+        
+        .review-section h3 {
+            color: #10b981;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .review-item {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e5e7eb;
+        }
+        
+        .review-item.correct {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .review-item.incorrect {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1f2937;
+        }
+        
+        .review-answer {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .review-answer.user {
+            color: #6b7280;
+        }
+        
+        .review-answer.correct-ans {
+            color: #10b981;
+            font-weight: 600;
+        }
+        
+        .review-answer.incorrect-ans {
+            color: #ef4444;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        /* NAVIGATION */
+        .navigation {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: #10b981;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-links a:hover {
+            background: #f0fdf4;
+            transform: translateY(-2px);
+        }
+        
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header {
+                padding-top: 60px;
+            }
+            
+            .back-link {
+                position: static;
+                transform: none;
+                display: block;
+                margin: 0 auto 20px auto;
+                width: fit-content;
+            }
+            
+            .back-link:hover {
+                transform: translateX(-3px);
+            }
+            
+            .header h1 { font-size: 24px; }
+            .question-text { font-size: 18px; }
+            .question-card { padding: 30px; min-height: 350px; }
+            .btn { padding: 14px 24px; font-size: 14px; }
+            .score-circle { width: 120px; height: 120px; font-size: 36px; }
+            .results h2 { font-size: 28px; }
+            .nav-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <a href="index.html" class="back-link">← Înapoi la lecție</a>
+            <div class="logo">ʚଓ</div>
+            <h1>Test Final - Verbul LASSEN</h1>
+            <p>Evaluare completă A1-A2</p>
+        </div>
+        
+        <!-- TEST INFO -->
+        <div class="test-info" id="testInfo">
+            <h2>📋 Informații despre test</h2>
+            <ul>
+                <li>✅ <strong>15 întrebări</strong> - carusel interactiv</li>
+                <li>⏱️ <strong>Fără limită de timp</strong> - lucrează în ritmul tău</li>
+                <li>🎯 <strong>Punctaj minim pentru promovare:</strong> 70%</li>
+                <li>🔄 <strong>Poți reia testul</strong> de câte ori vrei</li>
+            </ul>
+            <div class="btn-container">
+                <button class="btn btn-primary" onclick="startTest()">🚀 Începe testul</button>
+            </div>
+        </div>
+        
+        <!-- PROGRESS (hidden initially) -->
+        <div class="progress-container" id="progressContainer" style="display: none;">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 6.67%"></div>
+            </div>
+            <div class="progress-text" id="progressText">Întrebarea 1 din 15</div>
+        </div>
+        
+        <!-- TEST QUESTIONS (hidden initially) -->
+        <div id="testQuestions" style="display: none;">
+            
+            <!-- Q1 -->
+            <div class="question-card active" data-q="1">
+                <div class="question-number">Întrebarea 1 din 15</div>
+                <div class="question-text">Completează: Ich _______ dich gehen.</div>
+                <input type="text" class="input-text" id="q1" placeholder="Scrie răspunsul aici">
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()" disabled>◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q2 -->
+            <div class="question-card" data-q="2">
+                <div class="question-number">Întrebarea 2 din 15</div>
+                <div class="question-text">Alege forma corectă: Du _______ mich warten.</div>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="q2" value="lasse"> lasse
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q2" value="lässt"> lässt
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q2" value="lasst"> lasst
+                    </label>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q3 -->
+            <div class="question-card" data-q="3">
+                <div class="question-number">Întrebarea 3 din 15</div>
+                <div class="question-text">Completează la Präteritum: Ich _______ ihn gehen.</div>
+                <input type="text" class="input-text" id="q3" placeholder="Scrie răspunsul aici">
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q4 -->
+            <div class="question-card" data-q="4">
+                <div class="question-number">Întrebarea 4 din 15</div>
+                <div class="question-text">Alege forma corectă: Wir _______ die Kinder spielen.</div>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="q4" value="lasse"> lasse
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q4" value="lassen"> lassen
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q4" value="lässt"> lässt
+                    </label>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q5 -->
+            <div class="question-card" data-q="5">
+                <div class="question-number">Întrebarea 5 din 15</div>
+                <div class="question-text">Completează la Präteritum: Du _______ das Fenster offen.</div>
+                <input type="text" class="input-text" id="q5" placeholder="Scrie răspunsul aici">
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q6 -->
+            <div class="question-card" data-q="6">
+                <div class="question-number">Întrebarea 6 din 15</div>
+                <div class="question-text">Care este forma corectă la Perfekt când lassen e SINGUR?</div>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="q6" value="habe lassen"> habe lassen
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q6" value="habe gelassen"> habe gelassen
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q6" value="bin gelassen"> bin gelassen
+                    </label>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q7 -->
+            <div class="question-card" data-q="7">
+                <div class="question-number">Întrebarea 7 din 15</div>
+                <div class="question-text">Completează: Ich habe das Auto reparieren _______.</div>
+                <input type="text" class="input-text" id="q7" placeholder="gelassen sau lassen?">
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q8 -->
+            <div class="question-card" data-q="8">
+                <div class="question-number">Întrebarea 8 din 15</div>
+                <div class="question-text">Ce înseamnă "Lass das!" în română?</div>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="q8" value="Las-o baltă!"> Las-o baltă!
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q8" value="Lasă-mă în pace!"> Lasă-mă în pace!
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q8" value="Hai să mergem!"> Hai să mergem!
+                    </label>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q9 -->
+            <div class="question-card" data-q="9">
+                <div class="question-number">Întrebarea 9 din 15</div>
+                <div class="question-text">Completează: Er _______ das Haus bauen. (Präteritum)</div>
+                <input type="text" class="input-text" id="q9" placeholder="Scrie răspunsul aici">
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q10 -->
+            <div class="question-card" data-q="10">
+                <div class="question-number">Întrebarea 10 din 15</div>
+                <div class="question-text">Alege traducerea corectă: "Lass mich in Ruhe!"</div>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="q10" value="Lasă-mă în pace!"> Lasă-mă în pace!
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q10" value="Las-o baltă!"> Las-o baltă!
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q10" value="Hai să plecăm!"> Hai să plecăm!
+                    </label>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q11 -->
+            <div class="question-card" data-q="11">
+                <div class="question-number">Întrebarea 11 din 15</div>
+                <div class="question-text">Completează: Ich habe es _______. (Am lăsat-o baltă)</div>
+                <input type="text" class="input-text" id="q11" placeholder="gelassen sau lassen?">
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q12 -->
+            <div class="question-card" data-q="12">
+                <div class="question-number">Întrebarea 12 din 15</div>
+                <div class="question-text">Care este forma corectă? "Lass uns _______!"</div>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="q12" value="gehen"> gehen
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q12" value="geht"> geht
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q12" value="gegangen"> gegangen
+                    </label>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q13 -->
+            <div class="question-card" data-q="13">
+                <div class="question-number">Întrebarea 13 din 15</div>
+                <div class="question-text">Completează: Wir _______ das Haus bauen. (Präteritum)</div>
+                <input type="text" class="input-text" id="q13" placeholder="Scrie răspunsul aici">
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q14 -->
+            <div class="question-card" data-q="14">
+                <div class="question-number">Întrebarea 14 din 15</div>
+                <div class="question-text">Ce înseamnă: "Ich lasse das Auto reparieren."?</div>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="q14" value="Las mașina la reparat."> Las mașina la reparat.
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q14" value="Repar mașina."> Repar mașina.
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q14" value="Las mașina acasă."> Las mașina acasă.
+                    </label>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="nextQuestion()">Următor ▶</button>
+                </div>
+            </div>
+            
+            <!-- Q15 -->
+            <div class="question-card" data-q="15">
+                <div class="question-number">Întrebarea 15 din 15</div>
+                <div class="question-text">La Perfekt, când folosim "lassen" în loc de "gelassen"?</div>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="q15" value="Când e urmat de alt infinitiv"> Când e urmat de alt infinitiv (infinitiv dublu)
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q15" value="Când e singur"> Când e singur, fără alt verb
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="q15" value="Întotdeauna"> Întotdeauna folosim "lassen"
+                    </label>
+                </div>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="prevQuestion()">◀ Anterior</button>
+                    <button class="btn btn-primary" onclick="submitTest()">✅ Verifică răspunsurile</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- RESULTS (hidden initially) -->
+        <div class="results" id="results">
+            <h2>🎉 Test finalizat!</h2>
+            <div class="score-circle" id="scoreCircle">0/15</div>
+            <div class="grade" id="grade"></div>
+            <p id="resultMessage"></p>
+            
+            <!-- REVIEW SECTION -->
+            <div class="review-section">
+                <h3>📋 Rezolvări complete:</h3>
+                <div id="reviewList"></div>
+            </div>
+            
+            <div class="btn-container">
+                <button class="btn btn-primary" onclick="retakeTest()">🔄 Reia testul</button>
+                <a href="flashcards.html" class="btn btn-secondary">🎴 Flashcards</a>
+                <a href="index.html" class="btn btn-secondary">📚 Înapoi la lecție</a>
+            </div>
+        </div>
+        
+        <!-- NAVIGATION -->
+        <div class="navigation">
+            <div class="nav-links">
+                <a href="index.html">📚 Înapoi la lecție</a>
+                <a href="flashcards.html">🎴 Flashcards</a>
+                <a href="https://yaz5dfqyx89.typeform.com/to/Gjbfu2WK" target="_blank">📊 Feedback</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <div class="footer">
+        <p><strong>ʚଓ Claudia Toth</strong> - Curs autorizat de limba germană</p>
+        <p>© 2026</p>
+    </div>
+    
+    <script>
+        // QUESTIONS DATA
+        const questions = [
+            { id: 'q1', text: 'Completează: Ich _______ dich gehen.', answer: 'lasse' },
+            { id: 'q2', text: 'Alege forma corectă: Du _______ mich warten.', answer: 'lässt' },
+            { id: 'q3', text: 'Completează la Präteritum: Ich _______ ihn gehen.', answer: 'ließ' },
+            { id: 'q4', text: 'Alege forma corectă: Wir _______ die Kinder spielen.', answer: 'lassen' },
+            { id: 'q5', text: 'Completează la Präteritum: Du _______ das Fenster offen.', answer: 'ließest' },
+            { id: 'q6', text: 'Care este forma corectă la Perfekt când lassen e SINGUR?', answer: 'habe gelassen' },
+            { id: 'q7', text: 'Completează: Ich habe das Auto reparieren _______.', answer: 'lassen' },
+            { id: 'q8', text: 'Ce înseamnă "Lass das!" în română?', answer: 'Las-o baltă!' },
+            { id: 'q9', text: 'Completează: Er _______ das Haus bauen. (Präteritum)', answer: 'ließ' },
+            { id: 'q10', text: 'Alege traducerea corectă: "Lass mich in Ruhe!"', answer: 'Lasă-mă în pace!' },
+            { id: 'q11', text: 'Completează: Ich habe es _______. (Am lăsat-o baltă)', answer: 'gelassen' },
+            { id: 'q12', text: 'Care este forma corectă? "Lass uns _______!"', answer: 'gehen' },
+            { id: 'q13', text: 'Completează: Wir _______ das Haus bauen. (Präteritum)', answer: 'ließen' },
+            { id: 'q14', text: 'Ce înseamnă: "Ich lasse das Auto reparieren."?', answer: 'Las mașina la reparat.' },
+            { id: 'q15', text: 'La Perfekt, când folosim "lassen" în loc de "gelassen"?', answer: 'Când e urmat de alt infinitiv' }
+        ];
+        
+        let currentQuestion = 0;
+        const totalQuestions = 15;
+        
+        function startTest() {
+            document.getElementById('testInfo').style.display = 'none';
+            document.getElementById('progressContainer').style.display = 'block';
+            document.getElementById('testQuestions').style.display = 'block';
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Întrebarea ${currentQuestion + 1} din ${totalQuestions}`;
+        }
+        
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions - 1) {
+                // Hide current
+                document.querySelectorAll('.question-card')[currentQuestion].classList.remove('active');
+                
+                // Show next
+                currentQuestion++;
+                document.querySelectorAll('.question-card')[currentQuestion].classList.add('active');
+                
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                // Hide current
+                document.querySelectorAll('.question-card')[currentQuestion].classList.remove('active');
+                
+                // Show previous
+                currentQuestion--;
+                document.querySelectorAll('.question-card')[currentQuestion].classList.add('active');
+                
+                updateProgress();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        
+        function submitTest() {
+            let score = 0;
+            const userAnswers = [];
+            
+            // Collect and check answers
+            questions.forEach((q, index) => {
+                let userAnswer = '';
+                
+                const textInput = document.getElementById(q.id);
+                if (textInput) {
+                    userAnswer = textInput.value.trim();
+                } else {
+                    const radio = document.querySelector(`input[name="${q.id}"]:checked`);
+                    if (radio) {
+                        userAnswer = radio.value;
+                    }
+                }
+                
+                const isCorrect = userAnswer.toLowerCase() === q.answer.toLowerCase();
+                if (isCorrect) score++;
+                
+                userAnswers.push({
+                    question: q.text,
+                    userAnswer: userAnswer || '(necompletat)',
+                    correctAnswer: q.answer,
+                    isCorrect: isCorrect
+                });
+            });
+            
+            showResults(score, totalQuestions, userAnswers);
+        }
+        
+        function showResults(score, total, userAnswers) {
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('testQuestions').style.display = 'none';
+            document.getElementById('results').classList.add('show');
+            
+            const percentage = Math.round((score / total) * 100);
+            
+            document.getElementById('scoreCircle').textContent = score + '/' + total;
+            
+            const gradeEl = document.getElementById('grade');
+            const messageEl = document.getElementById('resultMessage');
+            
+            if (percentage >= 90) {
+                gradeEl.textContent = '🌟 EXCELENT!';
+                gradeEl.className = 'grade excellent';
+                messageEl.textContent = `Ai obținut ${percentage}%! Cunoști foarte bine verbul LASSEN!`;
+            } else if (percentage >= 70) {
+                gradeEl.textContent = '✅ BINE!';
+                gradeEl.className = 'grade good';
+                messageEl.textContent = `Ai obținut ${percentage}%! Ai promovat testul, dar poți exersa mai mult.`;
+            } else {
+                gradeEl.textContent = '📚 Mai exersează!';
+                gradeEl.className = 'grade needs-improvement';
+                messageEl.textContent = `Ai obținut ${percentage}%. Revizuiește lecția și încearcă din nou!`;
+            }
+            
+            // Generate review list
+            const reviewList = document.getElementById('reviewList');
+            reviewList.innerHTML = '';
+            
+            userAnswers.forEach((item, index) => {
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item ' + (item.isCorrect ? 'correct' : 'incorrect');
+                
+                reviewItem.innerHTML = `
+                    <div class="review-question">${index + 1}. ${item.question}</div>
+                    <div class="review-answer user">Răspunsul tău: <strong>${item.userAnswer}</strong></div>
+                    ${item.isCorrect ? 
+                        '<div class="review-answer correct-ans">✅ Corect!</div>' : 
+                        `<div class="review-answer incorrect-ans">❌ Răspuns corect: <strong>${item.correctAnswer}</strong></div>`
+                    }
+                `;
+                
+                reviewList.appendChild(reviewItem);
+            });
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function retakeTest() {
+            // Reset everything
+            currentQuestion = 0;
+            
+            // Clear inputs
+            document.querySelectorAll('.input-text').forEach(input => input.value = '');
+            document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+            
+            // Reset display
+            document.querySelectorAll('.question-card').forEach((card, index) => {
+                card.classList.remove('active');
+                if (index === 0) card.classList.add('active');
+            });
+            
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('progressContainer').style.display = 'block';
+            document.getElementById('testQuestions').style.display = 'block';
+            
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
