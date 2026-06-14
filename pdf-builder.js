@@ -39,7 +39,7 @@
         t = t.replace(/<div class="andreea-note">\s*<img[^>]*>\s*<div class="andreea-note-content">\s*<div class="speaker">([^<]+)<\/div>\s*<div class="text">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/g,
             '<div class="theory-box warn-box"><h4>💚 $1</h4><p>$2</p></div>');
         t = t.replace(/<div class="theory-box"\s+style="background:\s*#dbeafe[^"]*"[^>]*>/g, '<div class="theory-box info-box">');
-        t = t.replace(/<div class="theory-box"\s+style="background:\s*#fef3c7[^"]*"[^>]*>/g, '<div class="theory-box warn-box">');
+        t = t.replace(/<div class="theory-box"\s+style="background:\s*#F5F0E8[^"]*"[^>]*>/g, '<div class="theory-box warn-box">');
         t = t.replace(/<div class="theory-box"\s+style="background:\s*#ecfdf5[^"]*"[^>]*>/g, '<div class="theory-box" style="border-left-color:#10b981;">');
         return '<h1 class="chapter">📘 1. Teorie — Verbul LASSEN (7 subsecțiuni)</h1>' + t;
     }
@@ -99,7 +99,7 @@
             '<table><thead><tr><th>Germană</th><th>Română (cu sensul)</th></tr></thead><tbody>';
         if (typeof ex4Pairs !== 'undefined') {
             ex4Pairs.forEach(p => {
-                html += '<tr><td class="verb">' + p.de + '</td><td><em style="color:#6b7280;">' + p.ro + '</em></td></tr>';
+                html += '<tr><td class="verb">' + p.de + '</td><td><em style="color:#5A5147;">' + p.ro + '</em></td></tr>';
             });
         }
         html += '</tbody></table></div>';
@@ -112,7 +112,7 @@
         if (typeof ex5Data !== 'undefined') {
             ex5Data.forEach(item => {
                 const cleanExp = item.exp.replace(/<[^>]+>/g, '');
-                html += '<tr><td>' + item.text + '</td><td class="verb">' + item.correct + '</td><td><em style="color:#6b7280; font-size:9pt;">' + cleanExp + '</em></td></tr>';
+                html += '<tr><td>' + item.text + '</td><td class="verb">' + item.correct + '</td><td><em style="color:#5A5147; font-size:9pt;">' + cleanExp + '</em></td></tr>';
             });
         }
         html += '</tbody></table></div>';

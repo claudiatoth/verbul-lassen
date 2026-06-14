@@ -38,7 +38,7 @@ const theoryHTML = `
                 </ul>
             </div>
 
-            <div class="theory-box" style="background:#fef3c7;">
+            <div class="theory-box" style="background:#F5F0E8;">
                 <h4>⚠️ Capcana cea mai mare</h4>
                 <p>În română „a lăsa" are același cuvânt pentru toate sensurile. În germană, <strong>lassen</strong> își schimbă semnificația în funcție de CONTEXT și STRUCTURĂ. Învață cele 3 tipare:</p>
                 <ul style="margin-top:8px;">
@@ -79,7 +79,7 @@ const theoryHTML = `
                 </tbody>
             </table>
 
-            <div class="theory-box" style="background:#fef3c7;">
+            <div class="theory-box" style="background:#F5F0E8;">
                 <h4>⚠️ ATENȚIE la formele cu Umlaut</h4>
                 <p><strong>du lässt</strong> și <strong>er/sie/es lässt</strong> — TOATE au <strong>ä</strong> (Umlaut) + <strong>ss</strong>. Nu se confundă cu <em>lasst</em> (voi) care e fără Umlaut.</p>
                 <p style="margin-top:8px;">Comparație: <em>du <strong>lässt</strong> mich</em> (tu mă lași) vs <em>ihr <strong>lasst</strong> mich</em> (voi mă lăsați).</p>
@@ -154,7 +154,7 @@ const theoryHTML = `
                 </tbody>
             </table>
 
-            <div class="theory-box" style="background:#fef3c7;">
+            <div class="theory-box" style="background:#F5F0E8;">
                 <h4>🚨 REGULA IMPORTANTĂ — <em>gelassen</em> SAU <em>lassen</em>?</h4>
                 <ul style="margin-top:8px;">
                     <li style="margin-bottom:10px;"><strong style="color:#10b981;">gelassen</strong> = când lassen e SINGUR (fără alt infinitiv lângă):<br>
@@ -204,7 +204,7 @@ const theoryHTML = `
                 </tbody>
             </table>
 
-            <div class="theory-box" style="background:#fef3c7;">
+            <div class="theory-box" style="background:#F5F0E8;">
                 <h4>⚠️ Atenție</h4>
                 <p>Persoana lăsată este la <strong>ACUZATIV</strong> (Akkusativ), NU dativ. <em>Ich lasse <strong>dich</strong></em> (Akk), nu „dir". <em>Sie lässt <strong>mich</strong></em> (Akk), nu „mir".</p>
             </div>
@@ -295,7 +295,7 @@ const theoryHTML = `
                 <p>→ <em>Die Tür lässt sich nicht öffnen.</em> = Ușa nu se poate deschide.</p>
             </div>
 
-            <div class="theory-box" style="background:#fef3c7; margin-top:18px; text-align:center;">
+            <div class="theory-box" style="background:#F5F0E8; margin-top:18px; text-align:center;">
                 <h4>🦋 Felicitări — ai învățat verbul LASSEN!</h4>
                 <p>Acum cunoști: <strong>3 sensuri</strong> (a lăsa/permite, cauzativ, a renunța), <strong>3 timpuri</strong> conjugate (Präsens, Präteritum, Perfekt), <strong>regula gelassen vs lassen</strong> și <strong>7 expresii uzuale</strong> esențiale.</p>
             </div>
